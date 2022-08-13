@@ -357,7 +357,7 @@ public final class AntiXrayHeuristics extends JavaPlugin implements Listener {
                         s.minedNonOreBlocksStreak = 0;
                     }
                 s.SetLastMinedOreData(m, ev.getBlock().getLocation());
-            } else if (m == Material.NETHER_QUARTZ_ORE) {
+            } else if (m == Material.valueOf("QUARTZ_ORE")) {
                 s.UpdateTimeAccountingProperties(ev.getPlayer());
                 if (s.GetLastMinedOre() != m || s.GetLastMinedOreLocation().distance(ev.getBlock().getLocation()) > getConfig().getInt("ConsiderAdjacentWithinDistance"))
                     if (s.minedNonOreBlocksStreak > getConfig().getInt("MinimumBlocksMinedToNextVein")) {
@@ -433,8 +433,8 @@ public final class AntiXrayHeuristics extends JavaPlugin implements Listener {
             return Material.DIAMOND_ORE;
         else if (e.getBlock().getType() == Material.EMERALD_ORE && getConfig().getLong("EmeraldWeight") != 0f)
             return Material.EMERALD_ORE;
-        else if (e.getBlock().getType() == Material.NETHER_QUARTZ_ORE && getConfig().getLong("QuartzWeight") != 0f)
-            return Material.NETHER_QUARTZ_ORE;
+        else if (getConfig().getLong("QuartzWeight") != 0f && e.getBlock().getType() == Material.valueOf("QUARTZ_ORE"))
+            return Material.valueOf("QUARTZ_ORE");
 
         else if(spigotVersion.version.GetValue() >= 116) //Spigot for MC 1.16+
         {
